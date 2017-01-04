@@ -46,7 +46,7 @@ if $::drbd_node_status == 'Primary' {
           group => $group,
           mode => $mode,  
           }
-      $parent = regsubst($full_path, '/[^/]*/?$', '')
+      $parent = regsubst($full_path, '/[^/]*/?/?$', '')
 
       if ($parent != $full_path) and ($parent != '') 
       {

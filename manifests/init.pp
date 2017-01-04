@@ -28,7 +28,7 @@ if $::drbd_node_status == 'Primary' {
       notice("####### $folders_list is created for $username #####")
       #notify { "Defined folders for $username":
       #message => "####### $folders_list is created for $username #####"
-    }
+    #}
   }
  #keys($dir_list).each | String $client_env |  
  #{

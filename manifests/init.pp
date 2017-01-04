@@ -46,8 +46,8 @@ if $::drbd_node_status == 'Primary' {
       if ($parent != $dir_name) and ($parent != '') 
       {
         exec { "create parent directory $parent for $dir_name": 
-        command => "/bin/mkdir -p $parent",
-        creates => "$parent",
+        command => "/bin/mkdir -p /chroot/$parent",
+        creates => "/chroot/$parent",
         before => File[$dir_name]
         }
       }

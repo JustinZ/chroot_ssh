@@ -47,7 +47,7 @@ if $::drbd_node_status == 'Primary' {
           mode => $mode,  
           }
       $parent = regsubst($full_path, '/[^/]*$', '')
-
+      notify {"$parent $full_path":} 
       if ($parent != $full_path) and ($parent != '') 
       {
         exec { "create parent directory $parent for $full_path": 

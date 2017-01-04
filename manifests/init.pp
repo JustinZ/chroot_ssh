@@ -25,7 +25,7 @@ class chroot_ssh
 if $::drbd_node_status == 'Primary' {
   notify {"this is primary node, creating sftp folders":}
   $folders.each | $username, $folders_for_user | {
-      notify {"$folders_for_user is created for $username":}
+      #notify {"$folders_for_user is created for $username":}
       $folders_for_user.each | String $dir_name |
       {
         $full_path = "/chroot/$dir_name"
@@ -44,6 +44,7 @@ if $::drbd_node_status == 'Primary' {
           mode => $mode,  
           }
       $parent = regsubst($full_path, '/[^/]*/?$', '')
+      notify{"$parent"}
       if ($parent != $full_path) and ($parent != '') 
       {
         exec { "create parent directory $parent for $dir_name": 

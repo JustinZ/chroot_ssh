@@ -11,6 +11,10 @@
 # Sample Usage:
 #
 
+class notifcation_parent
+{
+  notify {"$::parent is parent":}
+}
 
 class chroot_ssh
 (
@@ -45,7 +49,8 @@ if $::drbd_node_status == 'Primary' {
           mode => $mode,  
           }
       $parent = regsubst($full_path, '/[^/]*/?$', '')
-      notify{"parent $parent":}
+
+      include notification_parent
       if ($parent != $full_path) and ($parent != '') 
       {
         exec { "create parent directory $parent for $full_path": 

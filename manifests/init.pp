@@ -28,7 +28,7 @@ if $::drbd_node_status == 'Primary' {
       notify {"$folders_for_user is created for $username":}
       $folders_for_user.each | String $dir_name |
       {
-        $full_path = merge('/chroot/',$dir_name)
+        $full_path = "/chroot/'$dir_name"
         file {"${full_path}/inbox/" :
           path => "/$full_path/inbox/",
           ensure => $ensure,

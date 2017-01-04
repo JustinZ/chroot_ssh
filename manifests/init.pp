@@ -29,14 +29,14 @@ if $::drbd_node_status == 'Primary' {
       $folders_for_user.each | String $dir_name |
       {
         file {"${dir_name}/inbox/" :
-          path => "${dir_name}/inbox/",
+          path => "/chroot/${dir_name}/inbox/",
           ensure => $ensure,
           owner => $username,
           group => $group,
           mode => $mode,   
           }
         file {"${dir_name}/outbox/" :
-          path => "${dir_name}/outbox/",
+          path => "/chroot/${dir_name}/outbox/",
           ensure => $ensure,
           owner => $username,
           group => $group,

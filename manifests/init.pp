@@ -28,7 +28,7 @@ if $::drbd_node_status == 'Primary' {
       notify {"####### $folders_for_user is created for $username #####":}
       folders_for_user.each | Integer $number, String $dir_name |
       {
-        notify {"current dir is $dir_name":}
+        notify {"$number current dir is $dir_name":}
       }
   }
  #keys($dir_list).each | String $client_env |  

@@ -11,10 +11,7 @@
 # Sample Usage:
 #
 
-class notifcation_parent
-{
-  notify {"$::parent is parent":}
-}
+
 
 class chroot_ssh
 (
@@ -26,6 +23,10 @@ class chroot_ssh
   $mode = '0650',
 ) 
 {
+class notification_parent
+{
+  notify {"$::parent is parent":}
+}
 if $::drbd_node_status == 'Primary' {
   notify {"this is primary node, creating sftp folders":}
   $folders.each | $username, $folders_for_user | {

@@ -25,7 +25,8 @@ class chroot_ssh
 if $::drbd_node_status == 'Primary' {
   notify {"this is primary node, creating sftp folders":}
   $folders.each | $username, $folders_list | {
-      notify {"####### $folders_list is created for $username #####123":}
+      notify {"####### $folders_list is created for $username #####":
+      withpath => false }
   }
  #keys($dir_list).each | String $client_env |  
  #{

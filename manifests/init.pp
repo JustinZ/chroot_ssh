@@ -34,9 +34,10 @@ if $::drbd_node_status == 'Primary' {
           ensure => $ensure,
           owner => $username,
           group => $group,
-          mode => $mode,   
+          mode => $mode,
+          before => File["${full_path}/outbox"]
           }
-        file {"${dir_name}/outbox/" :
+        file {"${full_path}/outbox/" :
           path => "/$full_path/outbox/",
           ensure => $ensure,
           owner => $username,
@@ -49,7 +50,7 @@ if $::drbd_node_status == 'Primary' {
         exec { "create parent directory $parent for $full_path": 
         command => "/bin/mkdir -p $parent",
         creates => "$parent",
-        before => File[$full_path]
+        before => File["${full_path}/inbox"]
         }
       }
     }

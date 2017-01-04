@@ -26,12 +26,9 @@ if $::drbd_node_status == 'Primary' {
   notify {"this is primary node, creating sftp folders":}
   $folders.each | $username, $folders_for_user | {
       notify {"####### $folders_for_user is created for $username #####":}
-      folders_for_user.each | Integer $number, String $dir_name |
+      $folders_for_user.each | String $dir_name |
       {
-        notice("${dir_name}")
-        #notify {"$number":
-        #  message => "$number current dir is $dir_name"
-         # }
+        notify {"current dir is $dir_name":}
       }
   }
  #keys($dir_list).each | String $client_env |  

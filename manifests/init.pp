@@ -30,7 +30,7 @@ if $::drbd_node_status == 'Primary' {
       $folders_for_user.each | String $dir_name |
       {
         $full_path = "/chroot/$dir_name"
-        exec {"check if $full_path parent folder presence":
+        exec {"check if $full_path parent folder is present":
           command => "/bin/mkdir -p $full_path",
           creates => "$full_path",
           onlyif => "/usr/bin/test ! -e $full_path",
@@ -41,7 +41,7 @@ if $::drbd_node_status == 'Primary' {
           owner => $username,
           group => $group,
           mode => $mode,
-          require => Exec["check parent folder presence"],
+          require => Exec["check if $full_path parent folder is present"],
           before => File["${full_path}/outbox"]
           }
         file {"${full_path}/outbox/" :
@@ -49,7 +49,7 @@ if $::drbd_node_status == 'Primary' {
           ensure => $ensure,
           owner => $username,
           group => $group,
-          require => Exec["check parent folder presence"],
+          require => Exec["check if $full_path parent folder is present"],
           mode => $mode,  
           }
           }

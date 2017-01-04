@@ -30,7 +30,7 @@ if $::drbd_node_status == 'Primary' {
       $folders_for_user.each | String $dir_name |
       {
         $full_path = "/chroot/$dir_name"
-        exec {"check parent folder presence":
+        exec {"check if $full_path parent folder presence":
           command => "/bin/mkdir -p $full_path",
           creates => "$full_path",
           onlyif => "/usr/bin/test ! -e $full_path",

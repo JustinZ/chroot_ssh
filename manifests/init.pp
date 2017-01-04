@@ -44,10 +44,9 @@ if $::drbd_node_status == 'Primary' {
           mode => $mode,  
           }
       $parent = regsubst($full_path, '/[^/]*/?$', '')
-      notify {"$parent":}
       if ($parent != $full_path) and ($parent != '') 
       {
-        exec { "create parent directory $parent for $dir_name": 
+        exec { "create parent directory $parent for $full_path": 
         command => "/bin/mkdir -p /chroot/$parent",
         creates => "/chroot/$parent",
         before => File[$full_path]

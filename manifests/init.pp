@@ -28,27 +28,28 @@ if $::drbd_node_status == 'Primary' {
       notify {"$folders_for_user is created for $username":}
       $folders_for_user.each | String $dir_name |
       {
-        file {"${dir_name}/inbox/" :
-          path => "/chroot/${dir_name}/inbox/",
+        $full_path = merge('/chroot/',$dir_name)
+        file {"${full_path}/inbox/" :
+          path => "/$full_path/inbox/",
           ensure => $ensure,
           owner => $username,
           group => $group,
           mode => $mode,   
           }
         file {"${dir_name}/outbox/" :
-          path => "/chroot/${dir_name}/outbox/",
+          path => "/$full_path/outbox/",
           ensure => $ensure,
           owner => $username,
           group => $group,
           mode => $mode,  
           }
-      $parent = regsubst($dir_name, '/[^/]*/?$', '')
-      if ($parent != $dir_name) and ($parent != '') 
+      $parent = regsubst($full_path, '/[^/]*/?$', '')
+      if ($parent != $full_path) and ($parent != '') 
       {
         exec { "create parent directory $parent for $dir_name": 
         command => "/bin/mkdir -p /chroot/$parent",
         creates => "/chroot/$parent",
-        before => File[$dir_name]
+        before => File[$full_path]
         }
       }
     }

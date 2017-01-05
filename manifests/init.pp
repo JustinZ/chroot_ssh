@@ -13,7 +13,7 @@
 
 
 
-class chroot_folders
+class chroot_ssh
 (
   $folders = undef,
   $dir_list = undef,

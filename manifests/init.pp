@@ -13,7 +13,7 @@
 
 
 
-class chroot_ssh
+class chroot_folders
 (
   $folders = undef,
   $dir_list = undef,
@@ -26,7 +26,6 @@ class chroot_ssh
 if $::drbd_node_status == 'Primary' {
   notify {"this is primary node, creating sftp folders":}
   $folders.each | $username, $folders_for_user | {
-      notify {"$folders_for_user is created for $username":}
       $folders_for_user.each | String $dir_name |
       {
         $full_path = "/chroot/$dir_name"

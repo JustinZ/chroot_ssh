@@ -30,7 +30,7 @@ if $::drbd_node_status == 'Primary' {
       {
         $full_path = "/chroot/$dir_name"
         exec {"check if $full_path parent folder is present":
-          command => "/bin/mkdir -p $full_path",
+          command => "/bin/mkdir -m 755 -p $full_path",
           creates => "$full_path",
           onlyif => "/usr/bin/test ! -e $full_path",
         }

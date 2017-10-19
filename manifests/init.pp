@@ -23,8 +23,8 @@ class chroot_ssh
   $mode = '0650',
 ) 
 {
-if $::drbd_node_status == 'Primary' {
-  notify {"this is primary node, creating sftp folders":}
+#if $::drbd_node_status == 'Primary' {
+#  notify {"this is primary node, creating sftp folders":}
   $folders.each | $username, $folders_for_user | {
       $folders_for_user.each | String $dir_name |
       {
@@ -54,7 +54,7 @@ if $::drbd_node_status == 'Primary' {
           }
     }
   }
-else {
-  notify {"this is not a primary node, will not create DRBD folders":}
-  }
-}
+#else {
+#  notify {"this is not a primary node, will not create DRBD folders":}
+#  }
+#}
